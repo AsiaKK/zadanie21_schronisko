@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new animal</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="baner">
+    <img src="http://schronisko.kalisz.pl/wp-content/uploads/2018/06/schronisko_logo.png">
+    <p>Schronisko Reksio i Klakier</p>
+</div>
+<a href="/">Powrót do strony głownej</a>
+<hr>
+<h3>Dodaj zwierzaka do adopcji</h3>
+<hr>
+
+<form id="animal-form" action="/add" method="post" th:data-add-new="${addNew}">
+    <div class="row text-muted">
+        <div class="col-md-1">
+            <p class="font-weight-bold">Imię: </p>
+        </div>
+        <div class="col-md-6 my-auto">
+            <input type="text" class="form-control" id="animalNameInput" placeholder="Nazwa" name="animalName"
+                   th:value="${animal.name}" required>
+        </div>
+    </div>
+
+    <div class="row text-muted">
+        <div class="col-md-8">
+            <p class="font-weight-bold">Opis: </p>
+        </div>
+    </div>
+    <div class="row text-muted">
+        <div class="col-md-7">
+            <textarea required id="animalDescTextArea" th:value="${animal.description}"
+                      style="overflow-y: scroll; height: 100px; width: 100%;" th:text="${animal.description}"
+                      name="description"></textarea>
+        </div>
+    </div>
+
+    <div class="row text-muted">
+        <div class="col-md-1">
+            <p class="font-weight-bold">Kategoria: </p>
+        </div>
+        <div class="col-md-6">
+            <select id="categorySel" name="category" class="form-control">
+                <option th:each="category : ${categoriesForm}"
+                        th:value="${category}"
+                        th:text="${category}"
+                        th:selected="${category} == ${animal.category} ? true : false">
+                </option>
+            </select>
+        </div>
+    </div>
+
+</form>
+</div>
+<div class="modal-body">
+    <div class="row my-1">
+        <div class="col-md-3">
+            <button id="confirm" type="submit" class="btn btn-block btn-success my-1"> Dodaj</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
